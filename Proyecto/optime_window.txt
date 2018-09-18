@@ -1,10 +1,12 @@
-function window=optime_window(stock,s_date,e_date)
-act1=downloadValues(stock,s_date,e_date,'d','history');
+function window=optime_window(stock)
+
 %act2=downloadValues('PE&OLES.MX','09/17/2017','09/17/2018','d','history');
 %act3=downloadValues('AMXL.MX','09/17/2017', '09/17/2018','d','history');
-precios = act1.AdjClose; %Seleccionar los precios de cierre
+precios = stock.AdjClose; %Seleccionar los precios de cierre
 %precios = act2.AdjClose
 %precios = act3.AdjClose
+
+
 
 
 for npm=2:30
@@ -71,6 +73,13 @@ end
 [rend, ventana]=max(y);
 rend
 window=ventana+1 %se suma uno por la posición de inicio del for
+
+
+
+
+
+end
+
 
 
 

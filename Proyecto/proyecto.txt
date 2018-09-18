@@ -1,0 +1,2 @@
+act1=downloadValues('CEMEXCPO.MX','17/09/2017','17/09/2018','d','history');
+v1=optime_window(act1)
