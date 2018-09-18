@@ -1,2 +1,6 @@
 act1=downloadValues('CEMEXCPO.MX','17/09/2017','17/09/2018','d','history');
+act2=downloadValues('PE&OLES.MX','09/17/2017','09/17/2018','d','history');
+act3=downloadValues('AMXL.MX','09/17/2017', '09/17/2018','d','history');
+
+weights=optime_ponderations(act1,act2,act3)
 v1=optime_window(act1)
