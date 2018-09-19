@@ -1,69 +1,73 @@
 clear all;
 close all;
 clc;
+%% descarga de datos
+act1=downloadValues('AAPL','17/09/2017','17/09/2018','d','history');
+act2=downloadValues('AMZN','09/17/2017','09/17/2018','d','history');
+act3=downloadValues('TWTR','09/17/2017', '09/17/2018','d','history');
+
+%% calculo de pesos con markowitz
+money=100000;
+weights=optime_ponderations(act1,act2,act3) %ponderaciones markowitz
 %%
-act1=downloadValues('CEMEXCPO.MX','17/09/2017','17/09/2018','d','history');
-act2=downloadValues('PE&OLES.MX','09/17/2017','09/17/2018','d','history');
-act3=downloadValues('AMXL.MX','09/17/2017', '09/17/2018','d','history');
-
-k=100;
-weights=optime_ponderations(act1,act2,act3); %ponderaciones markowitz
-
+v1=optime_window(act1); %venta optima promedio movil
+%% ponderaciones para promedio movil ponderado
+for i=1:v1(1)
+    pon(i,1)=1/v1(1);
+end
 %%
-v1=optime_window(act3); %venta optima promedio movil
-%ponderaciones para promedio movil ponderado
-pon1=.69;
-pon2=.31;
-
-precios = act3.AdjClose;
-result=trading_PMP_Proyecto(k,weights(3),precios,[pon1;pon2],v1)
+precios = act1.AdjClose;
 %%
+result=trading_PMP_Proyecto(money,weights(1),precios,[pon],v1(1))
 
-np=200; %Número de particulas
+%% Creacion de las variables necesaras de manera dinamica
 
-x1p=pon1.*ones(np,1); % inicialización
-x1pg=0; %valor inicial del mejor global
-x1pL=x1p; %valores inciales de mejores locales
-vx1=zeros(np,1);  %velocidad del enjambre
-
-x2p=pon2.*ones(np,1); % inicialización
-x2pg=0; %valor inicial del mejor global
-x2pL=x1p; %valores inciales de mejores locales
-vx2=zeros(np,1);  %velocidad del enjambre
+%corregir numero de particulas a un numero mas grande
+np=5; %Número de particulas
+for i=1:v1(1)
+    
+    x1p(:,i)=pon(1).*ones(np,1); % inicialización
+    x1pg(i,1)=0; %valor inicial del mejor global
+    x1pL(:,i)=x1p(:,1); %valores inciales de mejores locales
+    vx1(:,i)=zeros(np,1); 
+end
+%%
 fxpg=1000; %desempeño valor inicial del mejor global
 fxpL=ones(np,1)*fxpg; %desempeño delos mejores locales
 
-c1=0.01;  %Velocidad de convergencia al  mejor global
-c2=0.01; %velocidad de convergencia al mejor local
+c1=0.5;  %Velocidad de convergencia al  mejor global
+c2=0.5; %velocidad de convergencia al mejor local
 
 %%
-for k=1:2500
+%corregir el numero de vueltas a un numero mas grande
+for k=1:10
 a=-100;
 
 for i=1:np
-    
-    fx(i,1)=-(trading_PMP_Proyecto(k,weights(3),precios,[x1p(i);x2p(i)],v1)+a*abs(x1p(1)+x2p(1)-1)+a*max(-x1p,0)+a*max(-x2p,0));
+    %checar condicion de >= 0 para un vector
+    fx(i,1)=-(trading_PMP_Proyecto(money,weights(1),precios,transpose(x1p(1,:)),v1(1))+a*abs(sum(x1p(1,:))-1));
 end
-
 [val,ind]=min(fx);
 if val<fxpg
-    x1pg=x1p(ind,1);
-    x2pg=x2p(ind,1);
+    for i=1:v1(1)
+        x1pg(i)=x1p(ind,i); 
+    end
     fxpg=val;
 end
 for p=1:np
     if fx(p,1)<fxpL(p,1)
         fxpL(p,1)=fx(p,1);
-        x1pL(p,1)=x1p(p,1);
-        x2pL(p,1)=x2p(p,1);
+        for i=1:v1(1)
+            x1pL(p,i)=x1p(p,i);
+        end
     end
 end
-fxpg=trading_PMP_Proyecto(k,weights(3),precios,[x1pg;x2pg],v1);
-vx1=vx1+c1*rand(np,1).*(x1pg-x1p)+c2*rand()*(x1pL-x1p);
-x1p=x1p+vx1;
-%rand(np,1). sirve para darle una velocidad diferente a cada particula
+fxpg=trading_PMP_Proyecto(money,weights(1),precios,x1pg,v1(1));
 
-vx2=vx2+c1*rand(np,1).*(x2pg-x2p)+c2*rand()*(x2pL-x2p);
-x2p=x2p+vx2;
+for i=1:v1(1)
+    vx1(:,i)=vx1(:,i)+c1*rand().*(x1pg(i)-x1p(:,i))+c2*rand()*(x1pL(:,i)-x1p(:,i));
+    x1p(:,i)=x1p(:,i)+vx1(:,i);
 end
-success=x1pg+x2pg
+
+end
+sprintf('success')

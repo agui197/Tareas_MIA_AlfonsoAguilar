@@ -1,4 +1,3 @@
-
 %% Obteniendo los datos que serán usandos para simular el algoritmo de trading
 function y=trading_PMP_Proyecto(k,w,precios,pond,n)
 
@@ -26,7 +25,7 @@ for t = 0:size(precios,1)-npm
     cap(npm+t+1,1) = cap(npm+t,1)-precios(npm+t,1)*u-com*precios(npm+t,1)*abs(u);
 end
 
-%% Visualización de los resultados
+% Visualización de los resultados
 % T = (1:size(precios,1))';
 % figure(1);
 % subplot(4,1,1);
