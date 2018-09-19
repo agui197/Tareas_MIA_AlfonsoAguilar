@@ -13,7 +13,11 @@ weights=optime_ponderations(act1,act2,act3) %ponderaciones markowitz
 v1=optime_window(act1); %venta optima promedio movil
 %% ponderaciones para promedio movil ponderado
 for i=1:v1(1)
-    pon(i,1)=1/v1(1);
+    pontemp(i,1)=rand();
+end
+suma=sum(pontemp)
+for i=1:v1(1)
+    pon(i,1)=pontemp(i,1)/suma;
 end
 %%
 precios = act1.AdjClose;
@@ -23,7 +27,7 @@ result=trading_PMP_Proyecto(money,weights(1),precios,[pon],v1(1))
 %% Creacion de las variables necesaras de manera dinamica
 
 %corregir numero de particulas a un numero mas grande
-np=5; %Número de particulas
+np=200; %Número de particulas
 for i=1:v1(1)
     
     x1p(:,i)=pon(1).*ones(np,1); % inicialización
@@ -40,8 +44,8 @@ c2=0.5; %velocidad de convergencia al mejor local
 
 %%
 %corregir el numero de vueltas a un numero mas grande
-for k=1:10
-a=-100;
+for k=1:1000
+a=-10000;
 
 for i=1:np
     %checar condicion de >= 0 para un vector
