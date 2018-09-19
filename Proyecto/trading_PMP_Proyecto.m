@@ -1,5 +1,3 @@
-function y=trading_PMP_Proyecto(k,w,precios,pond,n)
-
 
 %% Obteniendo los datos que serán usandos para simular el algoritmo de trading
 function y=trading_PMP_Proyecto(k,w,precios,pond,n)

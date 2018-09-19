@@ -81,9 +81,3 @@ window=ventana+1 %se suma uno por la posición de inicio del for
 end
 
 
-
-
-
-
-end
-
