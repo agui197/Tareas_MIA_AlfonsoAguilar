@@ -12,8 +12,8 @@ weights=optime_ponderations(act1,act2,act3); %ponderaciones markowitz
 %%
 v1=optime_window(act3); %venta optima promedio movil
 %ponderaciones para promedio movil ponderado
-pon1=.5;
-pon2=.5;
+pon1=.69;
+pon2=.31;
 
 precios = act3.AdjClose;
 result=trading_PMP_Proyecto(k,weights(3),precios,[pon1;pon2],v1)
@@ -30,15 +30,15 @@ x2p=pon2.*ones(np,1); % inicialización
 x2pg=0; %valor inicial del mejor global
 x2pL=x1p; %valores inciales de mejores locales
 vx2=zeros(np,1);  %velocidad del enjambre
-fxpg=1000000; %desempeño valor inicial del mejor global
+fxpg=1000; %desempeño valor inicial del mejor global
 fxpL=ones(np,1)*fxpg; %desempeño delos mejores locales
 
-c1=0.1;  %Velocidad de convergencia al  mejor global
-c2=0.1; %velocidad de convergencia al mejor local
+c1=0.01;  %Velocidad de convergencia al  mejor global
+c2=0.01; %velocidad de convergencia al mejor local
 
 %%
 for k=1:2500
-a=-1000;
+a=-100;
 
 for i=1:np
     
