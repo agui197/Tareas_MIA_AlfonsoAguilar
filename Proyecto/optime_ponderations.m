@@ -1,11 +1,19 @@
 function result=optime_ponderations(act1,act2,act3)
+% OPTIME_PONDERATIONS es la funcion encargada de buscar la ponderacion
+% otima para cada activo del portafolio usando un metodo de PSO llamando a
+% la funcion a optimizar la de portafolios de markowitz, el objetivo actual
+% del portafolio es encontrar un balance entre riesgo y rendimiento si se
+% quisiera minimizar el riesgo las instrucciones estan en las lineas
+% siguientes:
+%% Si quisiera minimizar riesgo (10000*Risk)
+%% Si se quisiera un balance entre riesgo y rendimiento 
+%  Esto es un punto medio -(10000*Rend-10000*Risk)
+%% Si quiero minimizar -(10000*Rend-20000*Risk)
+% Los parametros de la funcion son los activos unicamente
+
 Precios=[act1.AdjClose act2.AdjClose act3.AdjClose];
 
 %load portafolio.mat;
-% x=-10:0.01:10;
-% y=x.^2;
-% y=10+x.^2-15*cos(5*x);
-% y=-15*exp(-15*sqrt((x.^2)/2))-exp(cos(15*x)/2)+15+exp(1);
 
 np=2000; %Número de particulas
 
@@ -44,10 +52,7 @@ fx=-(1000*Rend-1000*Risk)+a*abs(x1p+x2p+x3p-1)...
     +a*max(-x2p,0)+a*max(x2p-1,0)...
     +a*max(-x3p,0)+a*max(x3p-1,0);    
 
-%Si quisiera minimizar riesgo (10000*Risk)
-%Si se quisiera un balance entre riesgo y rendimiento 
-%Esto es un punto medio -(10000*Rend-10000*Risk)
-% si quiero minimizar -(10000*Rend-20000*Risk)
+
 
 %Para determinar el mejor global
 [val,ind]=min(fx);

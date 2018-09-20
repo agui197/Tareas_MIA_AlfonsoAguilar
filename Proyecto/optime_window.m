@@ -1,17 +1,12 @@
 function window=optime_window(stock)
-
-%act2=downloadValues('PE&OLES.MX','09/17/2017','09/17/2018','d','history');
-%act3=downloadValues('AMXL.MX','09/17/2017', '09/17/2018','d','history');
+% OPTIME_WINDOW es la funcion encargada de encontrar la ventana de dias
+% ,en donde al comprar y vender si se supera o se baja de este promedio,
+% se obtuvo el mejor rendimiento del activo
+% los parametros de la funcion son STOCK = el activo
 precios = stock.AdjClose; %Seleccionar los precios de cierre
-%precios = act2.AdjClose
-%precios = act3.AdjClose
-
-
-
 
 for npm=2:30
     %% Algoritmo de trading basado en un promedio movil
-    %npm = 9; %Número de días usados para calcular el promedio móvil
     cap = 1000000*ones(size(precios)); %Capital inicial a invertir
     nac = 0*ones(size(precios)); %Número de acciones disponibles al inicio de la simulación
     com = 0.0029; %Comisión por operación
@@ -63,21 +58,11 @@ for npm=2:30
     
     y(npm,1)=rendimiento(end,1)
     %encontrar la posición maxima
-    
-   
-    
     npm=npm+1
     
 end
-
 [rend, ventana]=max(y);
-rend
 window=ventana+1 %se suma uno por la posición de inicio del for
-
-
-
-
-
 end
 
 

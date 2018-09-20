@@ -1,9 +1,17 @@
 %% Obteniendo los datos que serán usandos para simular el algoritmo de trading
 function y=trading_PMP_Proyecto(k,w,precios,pond,n)
-
-
-%% Obteniendo los datos que serán usandos para simular el algoritmo de trading
-
+% TRADING_PMP_PROYECTO es la funcion encargada de realizar el trading para
+% un activo deseado con una ponderacion calculada de un portafolio para una
+% ventana de dias especifica
+% los parametros de la funcion son K = Capital total a invertir
+%                                  W = La ponderacion para ese activo en el
+%                                  portafolio 
+%                                  PRECIOS = La serie de tiempo de los
+%                                  precios de ciere ajustado del activo
+%                                  PON = Los pesos para cada dia del
+%                                  promedio movil
+%                                  N = La ventana de dias para el promedio
+%                                  movil
 %% Algoritmo de trading basado en un promedio movil
 npm = n; %Número de días usados para calcular el promedio móvil
 cap = (k*w)*ones(size(precios)); %Capital inicial a invertir

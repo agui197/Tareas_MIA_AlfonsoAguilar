@@ -1,5 +1,18 @@
 function result=optime_PMP(money,weights,precios,v1,n)
-
+% OPTIME_PMP es la funcion encargada de encontrar los pesos por medio del
+% metodo de PSO para cada dia del promedio movil ponderado en donde se 
+% busca maximizar el rendimiento obtenido de cada
+% activo en especifico
+% los argumentos de la funcion son MONEY = la cantidad de dinero invertida
+%                                 WEIGHTS = La participacion del activo en
+%                                 el portafolio preferentemente calculada
+%                                 con el metodo de portafolios de markowitz
+%                                 PRECIOS = la serie de tiempo que contenga
+%                                 los precios del activo
+%                                 V1= La ventana de dias con los que se
+%                                 calculara el promedio movil
+%                                 N = el numero de particulas para buscar
+%                                 ese optimo
 np=n; %Número de particulas
 for j=1:np
     pontemp=rand(v1,1)
