@@ -22,12 +22,12 @@ end
 %%
 precios = act1.AdjClose;
 %%
-result=trading_PMP_Proyecto(money,weights(1),precios,[pon],v1(1))
+result=trading_PMP_Proyecto(money,weights(1),precios,[primera_ronda],v1(1))
 
 %% Creacion de las variables necesaras de manera dinamica
 
 %corregir numero de particulas a un numero mas grande
-np=200; %Número de particulas
+np=300; %Número de particulas
 for j=1:np
     for g=1:v1(1)
         pontemp(g,1)=rand();
@@ -52,7 +52,7 @@ c2=0.3; %velocidad de convergencia al mejor local
 
 %%
 %corregir el numero de vueltas a un numero mas grande
-for k=1:1000
+for k=1:2000
 a=-10000;
 
 for i=1:np

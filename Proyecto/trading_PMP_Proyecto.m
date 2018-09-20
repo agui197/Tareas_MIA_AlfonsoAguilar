@@ -26,28 +26,28 @@ for t = 0:size(precios,1)-npm
 end
 
 % Visualización de los resultados
-T = (1:size(precios,1))';
-figure(1);
-subplot(4,1,1);
-plot(T,precios,'b-',T(npm:end),pm(npm:end),'r--');
-title(sprintf('Promedio Movil a %d días',npm)),xlabel('# dias'), ylabel('precio');
-legend('precio','promedio','Location','NorthEastOutside');
-grid;
-subplot(4,1,2);
-plot(T,nac(1:end-1,1),'b-');
-xlabel('# dias'), ylabel('# acciones');
-legend('# acciones','Location','NorthEastOutside');
-grid;
-subplot(4,1,3);
-plot(T,cap(1:end-1,1),'b-');
-xlabel('# dias'), ylabel('$');
-legend('capital','Location','NorthEastOutside');
-grid;
-subplot(4,1,4);
-plot(T,100*(cap(1:end-1,1)+precios.*nac(1:end-1,1)-cap(1,1))/cap(1,1),'b-');
-xlabel('# dias'), ylabel('rendimiento (%)');
-legend('Total','Location','NorthEastOutside');
-grid;
+% T = (1:size(precios,1))';
+% figure(1);
+% subplot(4,1,1);
+% plot(T,precios,'b-',T(npm:end),pm(npm:end),'r--');
+% title(sprintf('Promedio Movil a %d días',npm)),xlabel('# dias'), ylabel('precio');
+% legend('precio','promedio','Location','NorthEastOutside');
+% grid;
+% subplot(4,1,2);
+% plot(T,nac(1:end-1,1),'b-');
+% xlabel('# dias'), ylabel('# acciones');
+% legend('# acciones','Location','NorthEastOutside');
+% grid;
+% subplot(4,1,3);
+% plot(T,cap(1:end-1,1),'b-');
+% xlabel('# dias'), ylabel('$');
+% legend('capital','Location','NorthEastOutside');
+% grid;
+% subplot(4,1,4);
+% plot(T,100*(cap(1:end-1,1)+precios.*nac(1:end-1,1)-cap(1,1))/cap(1,1),'b-');
+% xlabel('# dias'), ylabel('rendimiento (%)');
+% legend('Total','Location','NorthEastOutside');
+% grid;
 rendimiento=100*(cap(1:end-1,1)+precios.*nac(1:end-1,1)-cap(1,1))/cap(1,1);  %rendimiento
 y=rendimiento(end,1);
 end
