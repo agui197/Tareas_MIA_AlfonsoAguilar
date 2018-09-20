@@ -17,7 +17,7 @@ for i=1:v1(1)
 end
 suma=sum(pontemp)
 for i=1:v1(1)
-    primera_ronda(i,1)=pontemp(i,1)/suma;
+    pon(i,1)=pontemp(i,1)/suma;
 end
 %%
 precios = act1.AdjClose;
@@ -57,7 +57,7 @@ a=-10000;
 
 for i=1:np
     %checar condicion de >= 0 para un vector
-    fx(i,1)=-(trading_PMP_Proyecto(money,weights(1),precios,transpose(x1p(i,:)),v1(1))+a*abs(sum(x1p(i,:))-1)+sum(a*max(-x1p(i,:),0)));
+    fx(i,1)=-(trading_PMP_Proyecto(money,weights(1),precios,transpose(x1p(i,:)),v1(1))+a*abs(sum(x1p(i,:))-1)+sum(a*max(x1p(i,:),0)));
 end
 [val,ind]=min(fx);
 if val<fxpg
@@ -83,6 +83,3 @@ end
 
 end
 sprintf('success')
-
-%%
-fxpg=trading_PMP_Proyecto(money,weights(1),precios,x1pg,v1(1));
