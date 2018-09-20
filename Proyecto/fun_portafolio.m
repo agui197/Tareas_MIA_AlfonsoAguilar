@@ -13,3 +13,4 @@ for k=1:npart
    riesgoport(k,:)=part(k,:)*covar*part(k,:)'; 
 end
 desvestport=sqrt(riesgoport);
+end
