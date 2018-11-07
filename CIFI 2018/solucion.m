@@ -6,7 +6,7 @@ close all;
 
 %%
 temp=cell2table(text);
-temp=temp(2:end,:);
+temp=temp(2:end,:); 
 num=table(num(:,[1,5]));
 states=unique(temp(:,2));
 producers=unique(temp(:,3));
