@@ -1,4 +1,4 @@
-function [Wmc,J]=adeline_MC(X,Y,k)
+function [Wmc,J,Xa]=adeline_MC(X,Y,k)
 m=size(X,1);
 Xa=func_polinomio(X,k);
 Wmc=inv(Xa'*Xa)*Xa'*Y; 
