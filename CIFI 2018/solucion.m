@@ -35,6 +35,7 @@ xlabel('Tiempo')
 ylabel('Cambio porcentual')
 hold on
 plot(Yg,'g')
+legend({'Y','Yg'});
 figure(2)
 bar(Wmc)
 title('Pesos del modelo')
@@ -46,6 +47,8 @@ xlabel('Tiempo')
 ylabel('Cambio porcentual')
 hold on
 plot(X(:,energia),'b')
+legend({'Y','Energía'});
+
 %% Prediccion 
 x=[5,5,5,5,5,5,5,5];
 xa=func_polinomio(x,grado);

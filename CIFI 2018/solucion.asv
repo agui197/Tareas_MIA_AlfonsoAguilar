@@ -23,25 +23,30 @@ grado=1;
 [Wmc,J,Xa]=adeline_MC(X,Y,grado);
 %[Wgd,J]=adeline_GD(X,Y,grado);
 
-Wmc
 % Plot
 % Modificar la energia que queremos graficar
-Yg=Xa*Wmc
 energia=1;
+
+Yg=Xa*Wmc;
 figure(1)
 plot(Y,'r')
+title('Total de energia real vs Total de energia del modelo')
+xlabel('Tiempo')
+ylabel('Cambio porcentual')
 hold on
-plot(Yg,'g')
+plot(Yg,'g',la)
 figure(2)
 bar(Wmc)
+title('Pesos del modelo')
+xlabel('Variables')
 figure(3)
 plot(Y,'r')
 title('Fuente especifica de energia vs Total de produccion del estado')
 xlabel('Tiempo')
-ylabel('
+ylabel('Cambio porcentual')
 hold on
 plot(X(:,energia),'b')
-%%
+%% Prediccion 
 x=[5,5,5,5,5,5,5,5];
 xa=func_polinomio(x,grado);
 Yg_mc=xa*Wmc;
