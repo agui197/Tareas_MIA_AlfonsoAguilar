@@ -1,11 +1,5 @@
-function [Accu,Prec,Rec,red]=red_creation(capas)
+function [Accu,Prec,Rec,red]=red_creation(capas,Ytrain,Xtrain,Y,X)
 %Cargar datos
-data = xlsread('proyecto 3','DATASET1','A2:N1431');
-
-
-Ytrain=data(:,end)';
-Xtrain=data(:,1:end-1)';
-
 
 %Creación de la red neuronal
 red=feedforwardnet(capas);
@@ -26,11 +20,6 @@ Prec=TP/(TP+FP);
 Rec=TP/(TP+FN);
 
 [Accu Prec Rec] 
-
-datatest = xlsread('proyecto 3','PREDICCION','A2:N290');
-
-Y=datatest(:,end)';
-X=datatest(:,1:end-1)';
 
 Yg=red(X);
 Yg=round(Yg);
